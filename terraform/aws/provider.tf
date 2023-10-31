@@ -5,12 +5,13 @@ terraform {
       version = ">= 5.21"
     }
   }
-  #backend "s3" {
-   # bucket         = "staticsite-multicloud-tf-v001"
-    #key            = "terraform.tfstate"
-    #dynamodb_table = "staticsite-multicloud-tf-v001"
-    #region         = "us-east-1"
-  #}
+     backend "s3" {
+    bucket         = "tf-notifier-state-multi"
+    key            = "path/to/terraform.tfstate"
+    dynamodb_table = "tf-notifier-state-multi"
+    region         = "us-east-1"
+    profile        = "fiap"
+  }
 }
 
 provider "aws" {
