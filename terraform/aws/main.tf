@@ -1,7 +1,7 @@
-resource "aws_s3_bucket" "bucket" {
-  provider = aws.fiap
-  bucket   = var.bucket_name
-}
+#resource "aws_s3_bucket" "bucket" {
+ # provider = aws.fiap
+ # bucket   = var.bucket_name
+#}
 
 resource "aws_s3_bucket_ownership_controls" "bucket-ownership" {
   provider = aws.fiap
