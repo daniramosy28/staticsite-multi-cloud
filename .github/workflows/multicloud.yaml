@@ -63,11 +63,11 @@ jobs:
   on-azure:
     name: Azure provider
     runs-on: ubuntu-latest
-    #env:
-     #   ARM_CLIENT_ID      : ${{ secrets.ARM_CLIENT_ID }}
-     #   ARM_CLIENT_SECRET  : ${{ secrets.ARM_CLIENT_SECRET }}
-     #   ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-     #   ARM_TENANT_ID      : ${{ secrets.ARM_TENANT_ID }}
+    env:
+        ARM_CLIENT_ID      : ${{ secrets.ARM_CLIENT_ID }}
+        ARM_CLIENT_SECRET  : ${{ secrets.ARM_CLIENT_SECRET }}
+        ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+        ARM_TENANT_ID      : ${{ secrets.ARM_TENANT_ID }}
     
     steps:
 
@@ -85,7 +85,7 @@ jobs:
     - name: Step 04 - Authenticate with Azure
       uses: azure/login@v1
       with:
-          creds: '${{ secrets.AZURE_CREDENTIALS }}'
+        creds: '{"clientId":"${{ secrets.ARM_CLIENT_ID }}","clientSecret":"${{ secrets.ARM_CLIENT_SECRET }}","subscriptionId":"${{ secrets.ARM_SUBSCRIPTION_ID }}","tenantId":"${{ secrets.ARM_TENANT_ID }}"}'
 
     - name: Step 05 - Terraform Init
       run : terraform -chdir=./terraform/azure init -input=false
