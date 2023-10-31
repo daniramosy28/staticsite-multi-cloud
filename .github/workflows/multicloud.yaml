@@ -1,4 +1,4 @@
-name: Terraform Multicloud
+name: Terraform Multicloud Danizinha
 
 on:
   push:
@@ -34,7 +34,16 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-session-token    : ${{ secrets.AWS_SESSION_TOKEN }}
         aws-region           : us-east-1
+
+    - name: Step 05 Create S3 Bucket
+      run: aws s3api create-bucket --bucket tf-notifier-state-multi --region us-east-1   
         
+    - name: Create DynamoDB Table
+      run: aws dynamodb create-table --table-name tf-notifier-state-multi --attribute-definitions AttributeName=LockID,AttributeType=S --key-schema AttributeName=LockID,KeyType=HASH --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5     
+
+    - name: Step Configure Backend for Terraform
+      run: echo 'terraform { backend "s3" { bucket = "tf-notifier-state-multi" key = "path/to/terraform.tfstate" region = "us-east-1" } }' > backend.tf   
+
     - name: Step 06 - Terraform Init
       run : terraform -chdir=./terraform/aws init -input=false
 
