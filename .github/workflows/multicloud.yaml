@@ -1,4 +1,4 @@
-name: Terraform Multicloud da Dani
+name: Terraform Multicloud
 
 on:
   push:
