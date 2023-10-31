@@ -1,5 +1,5 @@
 variable "bucket_name" {
-  default = "tf-multi-state-dani"
+  default = "tf-state-multi-cloud-dani"
 }
 
 variable "website_endpoint" {

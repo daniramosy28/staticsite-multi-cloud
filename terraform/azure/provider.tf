@@ -6,8 +6,8 @@ terraform {
     }
   }
   backend "azurerm" {
-    resource_group_name  = "rg-staticsiteazuredani-tf"
-    storage_account_name = "staticsiteazuredani"
+    resource_group_name  = "rg-danistaticsite"
+    storage_account_name = "danisitestatic"
     container_name       = "tfstate"
     key                  = "terraform.tfstate"
   }
